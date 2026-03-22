@@ -1,0 +1,9 @@
+{
+  "name": "E-commerce Store",
+  "description": "Online store with product catalog, shopping cart, checkout, and admin panel",
+  "icon": "shopping-cart",
+  "category": "commerce",
+  "services": { "database": true, "auth": false },
+  "repo": "https://github.com/jonndailey/dailey-template-store.git",
+  "branch": "main"
+}
