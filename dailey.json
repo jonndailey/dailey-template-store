@@ -5,5 +5,8 @@
   "category": "commerce",
   "services": { "database": true, "auth": false },
   "repo": "https://github.com/jonndailey/dailey-template-store.git",
-  "branch": "main"
+  "branch": "main",
+  "env": {
+    "ADMIN_PASSWORD": { "autoGenerate": true, "length": 24, "label": "Admin login password" }
+  }
 }
