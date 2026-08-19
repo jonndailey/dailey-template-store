@@ -230,7 +230,17 @@ app.get('/', async (req, res) => {
       </div>
       <div class="product-grid">${cards || '<p style="color:#888;text-align:center;padding:40px;">No products yet.</p>'}</div>
     `, { cartCount }));
-  } catch (err) { console.error(err); res.status(500).send('Error'); }
+  } catch (err) {
+    // Fail soft: the storefront must render (200) even if the database is
+    // briefly unreachable, so deploy health checks on "/" pass and visitors
+    // see a page instead of a bare 500.
+    console.error(err);
+    res.send(layout(STORE_NAME, `
+      <h1 class="page-title" style="margin-bottom:8px;">${STORE_NAME}</h1>
+      <p style="color:#888;margin-bottom:24px;">Quality products, great prices</p>
+      <p style="color:#888;text-align:center;padding:40px;">The store is starting up — products will appear here shortly. Refresh in a moment.</p>
+    `));
+  }
 });
 
 app.get('/product/:slug', async (req, res) => {
